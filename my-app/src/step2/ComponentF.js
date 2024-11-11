@@ -82,7 +82,7 @@ function ScrabbleBoard() {
                 style={{
                   color: 'black',
                   fontSize: '20px',
-                  fontWeight: 'bold',
+                  //fontWeight: 'bold',//
                   position: 'absolute',  // Absolutely position the letter inside the tile
                   zIndex: '2', 
                   backgroundColor: "#f5d1d1" // Higher z-index to ensure it is on top of the star
@@ -158,7 +158,7 @@ function ScrabbleBoard() {
       <div id="rack" style={{ display: 'flex', marginTop: '20px', width: "500px", height : "100px"}}>
         {lettersInRack.map((letter, index) => (
           <div key={index} className="column" style={{ margin: '0 5px' }}>
-            <p style={{ color: 'black', fontSize: '20px', fontWeight: 'bold',backgroundColor: "beige" }}>{letter}</p>
+            <p style={{ color: 'black', fontSize: '20px'}}>{letter}</p>
           </div>
         ))}
       </div>
