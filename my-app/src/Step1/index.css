@@ -90,7 +90,7 @@ body {
 
 /* Paragraph Styles */
 .p {
-    font-size: large;
+    font-size: x-large;
     font-family: 'Times New Roman', Times, serif;
     margin: 10px 0;
     /* Space between paragraphs */
@@ -237,7 +237,7 @@ body {
 
 /* Paragraph Styles */
 .p {
-    font-size: large;
+    font-size: x-large;
     font-family: 'Times New Roman', Times, serif;
     margin: 10px 0;
     /* Space between paragraphs */

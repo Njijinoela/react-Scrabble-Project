@@ -8,7 +8,7 @@ function ComponentD(){
 
         <p class="p">HOW TO PLAY</p>
         <h3>BOARD LAYOUT</h3>
-        <ul>
+        <ul class="p" >
             <li>
             Center star: The center star is where the first word of the game
             must be placed. .
