@@ -59,14 +59,35 @@ function ScrabbleBoard() {
               position: 'relative'
             }}
           >
-            <p style={{ color: 'black' }}>{bonus}</p>
+            <p style={{ color: 'black', margin: 0 }}>{bonus}</p>
+
+            {/* Render the star (*) at position (8,8) */}
             {r === 8 && c === 8 && (
-              <p style={{
-                fontSize: '30px', fontWeight: 'bold', zIndex: '5'
-              }}>*</p>
+              <p
+                style={{
+                  fontSize: '30px',
+                  fontWeight: 'bold',
+                  color: 'black',
+                  position: 'absolute',
+                  zIndex: '1',  // Lower z-index for the star
+                }}
+              >
+                *
+              </p>
             )}
+
+            {/* Render letter on the board if it exists */}
             {letterOnBoard && (
-              <p style={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
+              <p
+                style={{
+                  color: 'black',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  position: 'absolute',  // Absolutely position the letter inside the tile
+                  zIndex: '2', 
+                  backgroundColor: "#f5d1d1" // Higher z-index to ensure it is on top of the star
+                }}
+              >
                 {letterOnBoard.letter}
               </p>
             )}
@@ -134,10 +155,10 @@ function ScrabbleBoard() {
         {genBoard()}
       </div>
 
-      <div id="rack" style={{ display: 'flex', marginTop: '20px', width: "100px" }}>
+      <div id="rack" style={{ display: 'flex', marginTop: '20px', width: "500px", height : "100px"}}>
         {lettersInRack.map((letter, index) => (
           <div key={index} className="column" style={{ margin: '0 5px' }}>
-            <p style={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>{letter}</p>
+            <p style={{ color: 'black', fontSize: '20px', fontWeight: 'bold',backgroundColor: "beige" }}>{letter}</p>
           </div>
         ))}
       </div>
@@ -146,3 +167,7 @@ function ScrabbleBoard() {
 }
 
 export default ScrabbleBoard;
+
+
+
+
