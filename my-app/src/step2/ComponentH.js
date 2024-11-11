@@ -1,6 +1,6 @@
 import React from "react";
 
-function componentB () {
+function ComponentH () {
     return(
         <div>
              <h3>STEP 1</h3>
@@ -15,4 +15,4 @@ function componentB () {
         </div>
     )
 }; 
-export default componentB;
+export default ComponentH;

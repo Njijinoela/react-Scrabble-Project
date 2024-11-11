@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function ScrabbleBoard() {
-  const [letters, setLetters] = useState(['C', 'A', 'T', 'D', 'G', 'O', 'S', 'I', 'F', 'W']);
+  const [lettersInRack, setLettersInRack] = useState(['C', 'A', 'T', 'D', 'G', 'O', 'S', 'I', 'F', 'W']);
+  const [lettersOnBoard, setLettersOnBoard] = useState([]);
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
-  const [intervalId, setIntervalId] = useState(null);
-  
+
   const targetPositions = [
     { row: 8, col: 8 },  // C
     { row: 8, col: 9 },  // A
-    { row: 8, col: 10 }, // T
+    { row: 8, col: 10 }  // T
   ];
 
   const bonusPoints = {
@@ -18,12 +18,12 @@ function ScrabbleBoard() {
     TL: ["6,2", "10,2", "2,6", "6,6", "10,6", "14,6", "2,10", "6,10", "10,10", "14,10", "6,14", "10,14"]
   };
 
+  // Generate board with JSX elements
   const genBoard = () => {
     let board = [];
     for (let r = 1; r < 16; r++) {
       let row = [];
       for (let c = 1; c < 16; c++) {
-        const tileId = `${r},${c},moves`;
         let bonus = '';
         let bgColor = 'beige';
         
@@ -41,10 +41,13 @@ function ScrabbleBoard() {
           bonus = 'TW';
         }
 
+        const letterOnBoard = lettersOnBoard.find(
+          (letter) => letter.row === r && letter.col === c
+        );
+
         row.push(
           <div
             key={`${r},${c}`}
-            id={tileId}
             style={{
               width: '40px',
               height: '40px',
@@ -62,6 +65,11 @@ function ScrabbleBoard() {
                 fontSize: '30px', fontWeight: 'bold', zIndex: '5'
               }}>*</p>
             )}
+            {letterOnBoard && (
+              <p style={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
+                {letterOnBoard.letter}
+              </p>
+            )}
           </div>
         );
       }
@@ -70,22 +78,29 @@ function ScrabbleBoard() {
     return board;
   };
 
+  // Move a letter from the rack to the board
   const moveLetterToBoard = (letter, targetRow, targetCol) => {
-    // You would update the board state here instead of directly modifying the DOM
-    const board = [...letters];
-    board.push({ letter, row: targetRow, col: targetCol });
-    setLetters(board);
+    setLettersOnBoard((prev) => [...prev, { letter, row: targetRow, col: targetCol }]);
+    removeFromRack(letter);
   };
 
+  // Remove letter from rack
+  const removeFromRack = (letter) => {
+    setLettersInRack((prev) => prev.filter((l) => l !== letter));
+  };
+
+  // Move letter back to rack
   const moveLetterBackToRack = (letter) => {
-    setLetters((prev) => [...prev, letter]);
+    setLettersInRack((prev) => [...prev, letter]);
+    setLettersOnBoard((prev) => prev.filter((item) => item.letter !== letter));
   };
 
+  // Automated movement of letters
   const autoMoveLetters = () => {
-    if (currentLetterIndex < targetPositions.length) {
-      const letter = ['C', 'A', 'T'][currentLetterIndex];
+    const letters = ['C', 'A', 'T'];
+    if (currentLetterIndex < letters.length) {
+      const letter = letters[currentLetterIndex];
       const { row: targetRow, col: targetCol } = targetPositions[currentLetterIndex];
-
       moveLetterToBoard(letter, targetRow, targetCol);
       setCurrentLetterIndex((prev) => prev + 1);
     } else {
@@ -95,18 +110,22 @@ function ScrabbleBoard() {
     }
   };
 
+  // Remove all letters from board and reset
   const removeAllLettersFromBoard = () => {
-    setLetters([]);
+    lettersOnBoard.forEach(({ letter }) => {
+      moveLetterBackToRack(letter);
+    });
     setCurrentLetterIndex(0);
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      autoMoveLetters();
-    }, 1000); // Move each letter every 1 second
-    setIntervalId(interval);
+    if (currentLetterIndex < targetPositions.length) {
+      const interval = setInterval(() => {
+        autoMoveLetters();
+      }, 1000);
 
-    return () => clearInterval(interval); // Clean up the interval on unmount
+      return () => clearInterval(interval); // Clean up the interval on unmount
+    }
   }, [currentLetterIndex]);
 
   return (
@@ -115,10 +134,10 @@ function ScrabbleBoard() {
         {genBoard()}
       </div>
 
-      <div id="row" style={{ display: 'flex', marginTop: '20px' }}>
-        {letters.map((letter, index) => (
+      <div id="rack" style={{ display: 'flex', marginTop: '20px', width: "100px" }}>
+        {lettersInRack.map((letter, index) => (
           <div key={index} className="column" style={{ margin: '0 5px' }}>
-            <p style={{ color: 'black' }}>{letter}</p>
+            <p style={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>{letter}</p>
           </div>
         ))}
       </div>

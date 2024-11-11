@@ -1,10 +1,10 @@
 import ComponentA from "./Step1/ComponentA";
-import componentA from "./step2/component.c";
+import ComponentG from "./step2/ComponentG";
 function App() {
   return (
     <div>
       <ComponentA />
-      <componentA />
+      <ComponentG />
     </div>
   )
 }
