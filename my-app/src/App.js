@@ -4,9 +4,12 @@ import ComponentI from "./Step3/ComponentI";
 function App() {
   return (
     <div>
-      <ComponentA />
+       <ComponentA />
+    <div style={{display: "flex", flexDirection: "row", gap : "50px"}}>
+     
       <ComponentG />
       <ComponentI/>
+    </div>
     </div>
   )
 }
