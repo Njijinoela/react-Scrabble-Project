@@ -3,7 +3,7 @@ import ComponentM from "./ComponentM";
 import ComponentN from "./ComponentN";
 function ComponentL (){
     return (
-        <div>
+        <div style={{display : "flex", flexDirection: "row", gap: "50px"}}>
         <ComponentM />
         <ComponentN />  
         </div>
