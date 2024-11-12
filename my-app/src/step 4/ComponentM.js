@@ -17,15 +17,8 @@ function ComponentM (){
         words, the game ends. <br></br>If a player uses all seven of their tiles in one
         turn,they add a 50-point bonus to their word score.
       </p>
-
-      {/* <h2>STEP 5</h2>
-
-      <p className="p">
-        Consult a dictionary only if you’re challenging another player’s word. <br />
-        If the word isn’t in the dictioanary, the player loses their turn. <br />
-        If the word is allowed, the challenger loses their turn.
-      </p> */}
-      <h2>STEP 6</h2>
+      
+      <h2>STEP 5</h2>
 
       <p className="p">
         Calculate each player’s final score by adding up the points from all of
