@@ -72,7 +72,7 @@ function ScrabbleBoard() {
                   zIndex: '1',  // Lower z-index for the star
                 }}
               >
-                *
+                ⭐
               </p>
             )}
 

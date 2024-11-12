@@ -41,7 +41,7 @@ const Board = () => {
             id={`${r},${c},moves`}
           >
             <p style={{ color: "black", fontSize: isCenterTile ? "30px" : "16px", fontWeight: isCenterTile ? "bold" : "normal" }}>
-              {isCenterTile ? "*" : text}
+              {isCenterTile ? "⭐" : text}
             </p>
           </div>
         );
