@@ -39,6 +39,18 @@ function ComponentK() {
     setRack(prevRack => prevRack.filter(l => l !== letter));
   };
 
+  // Function to move a letter back to the rack
+  const moveLetterBackToRack = (letter, targetRow, targetCol) => {
+    setBoard(prevBoard => {
+      const newBoard = [...prevBoard];
+      newBoard[targetRow - 1][targetCol - 1] = null; // Clear the board position
+      return newBoard;
+    });
+
+    // Add the letter back to the rack
+    setRack(prevRack => [...prevRack, letter]);
+  };
+
   // Function to generate the board display
   const generateBoard = () => {
     let boardDisplay = [];
@@ -69,6 +81,16 @@ function ComponentK() {
         const letter = ['C', 'A', 'T'][currentLetterIndexCAT];
         moveLetterToBoard(letter, targetRow, targetCol);
         setCurrentLetterIndexCAT(prevIndex => prevIndex + 1);
+      } else {
+        // After all letters are on the board, move them back to the rack after 2 seconds
+        if (currentLetterIndexCAT >= targetPositionsCAT.length) {
+          setTimeout(() => {
+            ['C', 'A', 'T'].forEach((letter, index) => {
+              moveLetterBackToRack(letter, targetPositionsCAT[index].row, targetPositionsCAT[index].col);
+            });
+            setCurrentLetterIndexCAT(0); // Reset the index for continuous movement
+          }, 2000); // Wait for 2 seconds before moving letters back to the rack
+        }
       }
     }, 1000); // Move each letter every 1 second
 
@@ -83,6 +105,16 @@ function ComponentK() {
         const letter = ['A', 'S', 'K'][currentLetterIndexASK];
         moveLetterToBoard(letter, targetRow, targetCol);
         setCurrentLetterIndexASK(prevIndex => prevIndex + 1);
+      } else {
+        // After all letters are on the board, move them back to the rack after 2 seconds
+        if (currentLetterIndexASK >= targetPositionsASK.length) {
+          setTimeout(() => {
+            ['A', 'S', 'K'].forEach((letter, index) => {
+              moveLetterBackToRack(letter, targetPositionsASK[index].row, targetPositionsASK[index].col);
+            });
+            setCurrentLetterIndexASK(0); // Reset the index for continuous movement
+          }, 2000); // Wait for 2 seconds before moving letters back to the rack
+        }
       }
     }, 1500); // Move each letter for ASK
 
@@ -144,7 +176,6 @@ const Tile = ({ r, c, letter, bonusPoints, onLetterMove }) => {
             left: '2px',
             color: 'black',
             fontSize: '15px',
-            //fontWeight: 'bold',//
             margin: 0,
             zIndex: 1, // Ensure it's below the letter
           }}

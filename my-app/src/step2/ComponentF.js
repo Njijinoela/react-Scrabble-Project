@@ -4,6 +4,7 @@ function ScrabbleBoard() {
   const [lettersInRack, setLettersInRack] = useState(['C', 'A', 'T', 'D', 'G', 'O', 'S', 'I', 'F', 'W']);
   const [lettersOnBoard, setLettersOnBoard] = useState([]);
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
+  const [direction, setDirection] = useState('toBoard'); // State to track the movement direction
 
   const targetPositions = [
     { row: 8, col: 8 },  // C
@@ -119,35 +120,39 @@ function ScrabbleBoard() {
   // Automated movement of letters
   const autoMoveLetters = () => {
     const letters = ['C', 'A', 'T'];
-    if (currentLetterIndex < letters.length) {
-      const letter = letters[currentLetterIndex];
-      const { row: targetRow, col: targetCol } = targetPositions[currentLetterIndex];
-      moveLetterToBoard(letter, targetRow, targetCol);
-      setCurrentLetterIndex((prev) => prev + 1);
-    } else {
-      setTimeout(() => {
-        removeAllLettersFromBoard();
-      }, 3000);
+    if (direction === 'toBoard') {
+      if (currentLetterIndex < letters.length) {
+        const letter = letters[currentLetterIndex];
+        const { row: targetRow, col: targetCol } = targetPositions[currentLetterIndex];
+        moveLetterToBoard(letter, targetRow, targetCol);
+        setCurrentLetterIndex((prev) => prev + 1);
+      } else {
+        setTimeout(() => {
+          setDirection('toRack'); // Switch direction to remove letters
+          setCurrentLetterIndex(letters.length - 1);
+        }, 1000);
+      }
+    } else if (direction === 'toRack') {
+      if (currentLetterIndex >= 0) {
+        const letter = letters[currentLetterIndex];
+        moveLetterBackToRack(letter);
+        setCurrentLetterIndex((prev) => prev - 1);
+      } else {
+        setTimeout(() => {
+          setDirection('toBoard'); // Switch direction back to placing letters
+          setCurrentLetterIndex(0);
+        }, 1000);
+      }
     }
-  };
-
-  // Remove all letters from board and reset
-  const removeAllLettersFromBoard = () => {
-    lettersOnBoard.forEach(({ letter }) => {
-      moveLetterBackToRack(letter);
-    });
-    setCurrentLetterIndex(0);
   };
 
   useEffect(() => {
-    if (currentLetterIndex < targetPositions.length) {
-      const interval = setInterval(() => {
-        autoMoveLetters();
-      }, 1000);
+    const interval = setInterval(() => {
+      autoMoveLetters();
+    }, 1000);
 
-      return () => clearInterval(interval); // Clean up the interval on unmount
-    }
-  }, [currentLetterIndex]);
+    return () => clearInterval(interval); // Clean up the interval on unmount
+  }, [currentLetterIndex, direction]);
 
   return (
     <div>
@@ -167,7 +172,5 @@ function ScrabbleBoard() {
 }
 
 export default ScrabbleBoard;
-
-
 
 

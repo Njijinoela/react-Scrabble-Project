@@ -1,5 +1,5 @@
 body {
-    background-color: #E8ECEB;
+    background-color: #8CBDB9;
     /* Soft light background */
     font-family: 'Arial', sans-serif;
     /* Clean sans-serif font */
@@ -59,6 +59,10 @@ body {
     /* Slight rounding of corners */
     font-weight: bold;
     /* Bold text for emphasis */
+    display: "flex";
+        justify-content: "center";
+        align-items: "center";
+        margin: "0";
 }
 
 /* Heading Styles */
@@ -148,7 +152,7 @@ body {
     padding-top: 50px;
 }
 body {
-    background-color: #E8ECEB;
+    background-color: #8CBDB9;
     /* Soft light background */
     font-family: 'Arial', sans-serif;
     /* Clean sans-serif font */
@@ -241,6 +245,10 @@ body {
     font-family: 'Times New Roman', Times, serif;
     margin: 10px 0;
     /* Space between paragraphs */
+    display: "flex";
+        justify-content: "center";
+        align-items: "center";
+        margin: "0";
 }
 
 /* Responsive Styles */
