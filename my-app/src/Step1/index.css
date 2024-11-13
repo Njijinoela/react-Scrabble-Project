@@ -60,10 +60,7 @@ body {
     /* Slight rounding of corners */
     font-weight: bold;
     /* Bold text for emphasis */
-    display: "flex";
-        justify-content: "center";
-        align-items: "center";
-        margin: "0";
+    
 }
 
 /* Heading Styles */
