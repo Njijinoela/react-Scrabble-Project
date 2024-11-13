@@ -2,12 +2,14 @@ import React from "react";
 function ComponentM (){
     return (
         <div>
+          <div style={{justifyContent: "center", alignItems: "center", margin: "0",backgroundColor:"#8CBDB9"}}>
             <h2>STEP 3</h2>
+          
       <p className="p">
         After placing a word on the board, draw an equal number of new tiles
         from the tile bag so that each player always has seven tiles.
       </p>
-
+      
       <h2>STEP 4</h2>
 
       <p className="p">
@@ -17,6 +19,7 @@ function ComponentM (){
         words, the game ends. <br></br>If a player uses all seven of their tiles in one
         turn,they add a 50-point bonus to their word score.
       </p>
+       
       
       <h2>STEP 5</h2>
 
@@ -27,8 +30,9 @@ function ComponentM (){
         up all of their letters, add the sum of everyone else’s unplayed letters to their score. <br />
          The player with the highest score wins.
       </p>
-
-        </div>
+      </div>
+     
+     </div>   
     )
 }
 export default ComponentM ;
