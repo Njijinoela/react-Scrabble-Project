@@ -7,7 +7,7 @@ import ComponentL from "./step 4/ComponentL";
 function App() {
 
  return (
-    <div>
+    <div >
       <ComponentA />
     <div style={{display: "flex", flexDirection: "row", gap : "500px"}}>
      <ComponentG />

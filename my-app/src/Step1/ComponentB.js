@@ -5,7 +5,7 @@ function ComponentB(){
         <div >
             <div id="heading">
                 <h1>
-                    MASTERING SCRABBLE : <br />
+                    MASTERING SCRABBLE : <br /> 
                     How to Play and Win the game.
                 </h1>
                 <p className="p">

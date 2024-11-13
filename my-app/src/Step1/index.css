@@ -1,5 +1,6 @@
 body {
-    background-color: #8CBDB9;
+    /* background-color: #8CBDB9; */
+    background-image: "images/scrabble.jpg";
     /* Soft light background */
     font-family: 'Arial', sans-serif;
     /* Clean sans-serif font */
@@ -152,8 +153,10 @@ body {
     padding-top: 50px;
 }
 body {
-    background-color: #8CBDB9;
+ background-color: #8CBDB9;
+ 
     /* Soft light background */
+    
     font-family: 'Arial', sans-serif;
     /* Clean sans-serif font */
     line-height: 1.6;
